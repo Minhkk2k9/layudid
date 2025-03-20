@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhập UDID & Mã Đơn Hàng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        form {
+            display: inline-block;
+            text-align: left;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input, select, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .video-container, .udid-link {
+            margin-top: 20px;
+        }
+        .udid-link a {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .udid-link a:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Nhập Thông Tin Thiết Bị</h2>
+
+    <form id="udidForm">
+        <label for="udid">📌 Nhập UDID:</label>
+        <input type="text" id="udid" name="udid" required placeholder="Nhập UDID tại đây">
+
+        <label for="device">📱 Chọn thiết bị:</label>
+        <select id="device" name="device" required>
+            <option value="iPhone">iPhone</option>
+            <option value="iPad">iPad</option>
+        </select>
+
+        <label for="order_id">🛒 Mã đơn hàng:</label>
+        <input type="text" id="order_id" name="order_id" required placeholder="Nhập mã đơn hàng">
+
+        <button type="submit">Gửi Thông Tin</button>
+    </form>
+
+    <div class="video-container">
+        <h3>📽️ Hướng dẫn lấy UDID</h3>
+        <iframe src="https://streamable.com/e/fnhpu1" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div class="udid-link">
+        <h3>🔗 Lấy UDID nhanh</h3>
+        <a href="https://udid.tech/config/udid_tech.signed.mobileconfig" target="_blank">Bấm vào đây để lấy UDID</a>
+    </div>
+
+    <script>
+        document.getElementById("udidForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var udid = document.getElementById("udid").value;
+            var device = document.getElementById("device").value;
+            var order_id = document.getElementById("order_id").value;
+
+            var botToken = "7761119111:AAEdEiQ1kqam64ZE_RREg8BIqww8LgwQiaQ"; // Token bot Telegram
+            var chatId = "-1002614850176"; // ID nhóm Telegram
+
+            var message = `📢 **Thông tin đơn hàng mới:**\n\n`
+                        + `📌 **UDID:** ${udid}\n`
+                        + `📱 **Thiết bị:** ${device}\n`
+                        + `🛒 **Mã đơn hàng:** ${order_id}\n`
+                        + `🔗 **Xem đơn hàng tại:** [ontopreal.site](https://ontopreal.site)`;
+
+            var telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
+
+            fetch(telegramURL)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        alert("✅ Gửi thành công!");
+                        window.location.href = "https://t.me/chnjsnxiwj"; // Chuyển hướng sau khi gửi thành công
+                    } else {
+                        alert("❌ Lỗi gửi tin nhắn!");
+                    }
+                })
+                .catch(error => {
+                    alert("❌ Lỗi kết nối đến Telegram!");
+                });
+        });
+    </script>
+
+</body>
+</html>
