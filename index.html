@@ -33,7 +33,34 @@
         button:hover {
             background: #218838;
         }
-        .video-container, .udid-link {
+        .udid-guide {
+            margin-top: 20px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background: white;
+            width: 80%;
+            max-width: 500px;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .close {
+            color: red;
+            font-size: 24px;
+            cursor: pointer;
+            float: right;
+        }
+        .video-container {
             margin-top: 20px;
         }
         .udid-link a {
@@ -53,11 +80,11 @@
 <body>
 
     <h2>Nhập Thông Tin Thiết Bị</h2>
-
+    
     <form id="udidForm">
         <label for="udid">📌 Nhập UDID:</label>
         <input type="text" id="udid" name="udid" required placeholder="Nhập UDID tại đây">
-
+        
         <label for="device">📱 Chọn thiết bị:</label>
         <select id="device" name="device" required>
             <option value="iPhone">iPhone</option>
@@ -70,27 +97,41 @@
         <button type="submit">Gửi Thông Tin</button>
     </form>
 
-    <div class="video-container">
-        <h3>📽️ Hướng dẫn lấy UDID</h3>
-        <iframe src="https://streamable.com/e/fnhpu1" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
+    <div class="udid-guide">
+        <button onclick="openModal()">📽️ Hướng Dẫn Lấy UDID</button>
     </div>
 
-    <div class="udid-link">
-        <h3>🔗 Lấy UDID nhanh</h3>
-        <a href="https://udid.tech/config/udid_tech.signed.mobileconfig" target="_blank">Bấm vào đây để lấy UDID</a>
+    <div id="udidModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>🔗 Lấy UDID nhanh</h3>
+            <a href="https://udid.tech/config/udid_tech.signed.mobileconfig" target="_blank">Bấm vào đây để lấy UDID</a>
+            <div class="video-container">
+                <h3>📽️ Video hướng dẫn</h3>
+                <iframe src="https://streamable.com/e/fnhpu1" width="100%" height="250" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
     </div>
 
     <script>
+        function openModal() {
+            document.getElementById("udidModal").style.display = "block";
+        }
+        
+        function closeModal() {
+            document.getElementById("udidModal").style.display = "none";
+        }
+
         document.getElementById("udidForm").addEventListener("submit", function(event) {
             event.preventDefault();
-
+            
             var udid = document.getElementById("udid").value;
             var device = document.getElementById("device").value;
             var order_id = document.getElementById("order_id").value;
-
+            
             var botToken = "7761119111:AAEdEiQ1kqam64ZE_RREg8BIqww8LgwQiaQ"; // Token bot Telegram
             var chatId = "-1002614850176"; // ID nhóm Telegram
-
+            
             var message = `📢 **Thông tin đơn hàng mới:**\n\n`
                         + `📌 **UDID:** ${udid}\n`
                         + `📱 **Thiết bị:** ${device}\n`
