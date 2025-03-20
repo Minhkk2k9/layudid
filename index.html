@@ -10,6 +10,21 @@
             text-align: center;
             margin: 50px;
         }
+        .udid-guide {
+            margin-bottom: 20px;
+        }
+        .udid-guide button {
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .udid-guide button:hover {
+            background: #0056b3;
+        }
         form {
             display: inline-block;
             text-align: left;
@@ -32,9 +47,6 @@
         }
         button:hover {
             background: #218838;
-        }
-        .udid-guide {
-            margin-top: 20px;
         }
         .modal {
             display: none;
@@ -79,6 +91,10 @@
 </head>
 <body>
 
+    <div class="udid-guide">
+        <button onclick="openModal()">📽️ Hướng Dẫn Lấy UDID</button>
+    </div>
+
     <h2>Nhập Thông Tin Thiết Bị</h2>
     
     <form id="udidForm">
@@ -96,10 +112,6 @@
 
         <button type="submit">Gửi Thông Tin</button>
     </form>
-
-    <div class="udid-guide">
-        <button onclick="openModal()">📽️ Hướng Dẫn Lấy UDID</button>
-    </div>
 
     <div id="udidModal" class="modal">
         <div class="modal-content">
