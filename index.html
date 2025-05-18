@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nhập UDID & Thiết Bị</title>
   <style>
     body {
@@ -81,7 +81,7 @@
 <body>
 
   <h2>Tool Lấy Udid by Ontop</h2>
-  <h3>Mở ở safari(Bắt Buộc)</h3>
+  <h3>Mở Ở Safari(Bắt Buộc)</h3>
 
   <div class="button-group">
     <button onclick="openModal()">📽️ Hướng Dẫn Lấy UDID</button>
@@ -90,8 +90,9 @@
   <form id="udidForm">
     <label for="telegram_name">✏️ Tên Telegram:</label>
     <input type="text" id="telegram_name" name="telegram_name" required placeholder="Nhập tên Telegram của bạn">
+
     <label for="username_telegram">🔗 Username Telegram (nếu có):</label>
-    <input type="text" id="username_telegram" name="username_telegram" placeholder="Ví dụ: @username">
+    <input type="text" id="username_telegram" name="username_telegram" placeholder="Ví dụ: @ten_telegram">
 
     <label for="udid">📌 Nhập UDID:</label>
     <input type="text" id="udid" name="udid" required placeholder="Nhập UDID tại đây">
@@ -108,7 +109,6 @@
   <div id="udidModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
-      <h2>Mở Ở Safari(Bắt Buộc)</h2>
       <h3>🔗 Lấy UDID nhanh</h3>
       <a href="https://udid.tech/config/udid_tech.signed.mobileconfig">Bấm vào đây để lấy UDID</a>
       <div class="video-container">
@@ -131,6 +131,7 @@
       event.preventDefault();
 
       var telegramName = document.getElementById("telegram_name").value;
+      var usernameTelegram = document.getElementById("username_telegram").value;
       var udid = document.getElementById("udid").value;
       var device = document.getElementById("device").value;
 
@@ -138,11 +139,14 @@
       var chatId = "-1002614850176";
 
       var message = `📢 **Thông tin thiết bị mới:**\n\n`
-                  + `👤 **Telegram:** ${telegramName}\n`
-        if (usernameTelegram.trim() !== "") {
+                  + `👤 **Tên Telegram:** ${telegramName}\n`;
+
+      if (usernameTelegram.trim() !== "") {
         message += `🔗 **Username:** ${usernameTelegram}\n`;
-                  + `📌 **UDID:** ${udid}\n`
-                  + `📱 **Thiết bị:** ${device}`;
+      }
+
+      message += `📌 **UDID:** ${udid}\n`
+              + `📱 **Thiết bị:** ${device}`;
 
       var telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
 
@@ -150,8 +154,8 @@
         .then(response => response.json())
         .then(data => {
           if (data.ok) {
-            alert("✅ Đã Hoàn Tất");
-            window.location.href = "https://t.me/ontop2k9";
+            alert("✅ Gửi thành công!");
+            window.location.href = "https://t.me/AppProIphone_ShengZu";
           } else {
             alert("❌ Lỗi gửi tin nhắn!");
           }
