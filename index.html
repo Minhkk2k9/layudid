@@ -139,6 +139,8 @@
 
       var message = `📢 **Thông tin thiết bị mới:**\n\n`
                   + `👤 **Telegram:** ${telegramName}\n`
+        if (usernameTelegram.trim() !== "") {
+        message += `🔗 **Username:** ${usernameTelegram}\n`;
                   + `📌 **UDID:** ${udid}\n`
                   + `📱 **Thiết bị:** ${device}`;
 
